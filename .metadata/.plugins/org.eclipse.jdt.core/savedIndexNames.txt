@@ -1,0 +1,2 @@
+INDEX VERSION 1.134+C:\Users\Admin\Desktop\BTL_TTCSN_Nhom6\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
