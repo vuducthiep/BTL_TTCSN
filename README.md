@@ -1,1 +1,1 @@
-Project TTCSN Thực hiện 2 thuật toán tìm tập độc lập lớn nhất. Chia ra thành project nhỏ là: Greedy và Backtracking
+Project TTCSN nhóm 6, Thực hiện 2 thuật toán tìm tập độc lập lớn nhất: Greedy và Backtracking. Class Graph chứa các phương thức tạo đồ thị và tính toán đỉnh trong đồ thị, 2 class Greedy và Backtracking sẽ thực hiện giả bài toán.
