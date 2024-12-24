@@ -1,9 +1,9 @@
-package MIS;
+package src.MIS;
 
 import java.util.*;
 
 public class MyGraph {
-    private final Map<String, Set<String>> adjacencyList; // Danh sách kề để lưu các đỉnh và cạnh
+    private Map<String, Set<String>> adjacencyList;
 
     public MyGraph() {
         adjacencyList = new HashMap<>();
@@ -14,22 +14,31 @@ public class MyGraph {
         adjacencyList.putIfAbsent(vertex, new HashSet<>());
     }
 
-    // Thêm cạnh giữa hai đỉnh
-    public void addEdge(String vertex1, String vertex2) {
+    // Thêm cạnh vào đồ thị
+    public void addEdge(String vertex1, String vertex2) throws IllegalArgumentException {
+        // Kiểm tra nếu các đỉnh không tồn tại trong đồ thị
+        if (!adjacencyList.containsKey(vertex1)) {
+            throw new IllegalArgumentException("Đỉnh " + vertex1 + " không tồn tại trong đồ thị.");
+        }
+        if (!adjacencyList.containsKey(vertex2)) {
+            throw new IllegalArgumentException("Đỉnh " + vertex2 + " không tồn tại trong đồ thị.");
+        }
+
+        // Thêm cạnh nếu cả hai đỉnh đều tồn tại
         adjacencyList.putIfAbsent(vertex1, new HashSet<>());
         adjacencyList.putIfAbsent(vertex2, new HashSet<>());
         adjacencyList.get(vertex1).add(vertex2);
-        adjacencyList.get(vertex2).add(vertex1);
+        adjacencyList.get(vertex2).add(vertex1); // Vì đồ thị vô hướng
     }
 
-    // Loại bỏ đỉnh và tất cả các cạnh kề
-    public void removeVertex(String vertex) {
-        if (adjacencyList.containsKey(vertex)) {
-            for (String neighbor : adjacencyList.get(vertex)) {
-                adjacencyList.get(neighbor).remove(vertex);
-            }
-            adjacencyList.remove(vertex);
-        }
+    // Lấy các đỉnh của đồ thị
+    public Set<String> vertexSet() {
+        return adjacencyList.keySet();
+    }
+
+    // Lấy các đỉnh kề của một đỉnh
+    public Set<String> neighborsOf(String vertex) {
+        return adjacencyList.getOrDefault(vertex, Collections.emptySet());
     }
 
     // Lấy bậc của đỉnh
@@ -37,18 +46,11 @@ public class MyGraph {
         return adjacencyList.getOrDefault(vertex, Collections.emptySet()).size();
     }
 
-    // Lấy tập hợp các đỉnh
-    public Set<String> vertexSet() {
-        return adjacencyList.keySet();
-    }
-
-    // Lấy danh sách các đỉnh kề của một đỉnh
-    public Set<String> neighborsOf(String vertex) {
-        return adjacencyList.getOrDefault(vertex, Collections.emptySet());
-    }
-
-    // Kiểm tra danh sách kề
-    public boolean hasVertex(String vertex) {
-        return adjacencyList.containsKey(vertex);
+    // Xóa đỉnh khỏi đồ thị
+    public void removeVertex(String vertex) {
+        adjacencyList.remove(vertex);
+        for (Set<String> neighbors : adjacencyList.values()) {
+            neighbors.remove(vertex);
+        }
     }
 }

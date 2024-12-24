@@ -1,4 +1,4 @@
-package MIS;
+package src.MIS;
 
 
 
@@ -23,19 +23,24 @@ public class Backtracking {
             graph.addVertex(vertex);
         }
 
+        try {
         // Thêm các cạnh vào đồ thị
-        graph.addEdge("A", "B");
-        graph.addEdge("A", "C");
-        graph.addEdge("B", "C");
-        graph.addEdge("B", "E");
-        graph.addEdge("C", "E");
-        graph.addEdge("C", "F");
-        graph.addEdge("D", "F");
-        graph.addEdge("D", "G");
-        graph.addEdge("E", "H");
-        graph.addEdge("F", "J");
-        graph.addEdge("H", "I");
-        graph.addEdge("I", "J");
+	        graph.addEdge("A", "B");
+	        graph.addEdge("A", "C");
+	        graph.addEdge("B", "C");
+	        graph.addEdge("B", "E");
+	        graph.addEdge("C", "E");
+	        graph.addEdge("C", "F");
+	        graph.addEdge("D", "F");
+	        graph.addEdge("D", "G");
+	        graph.addEdge("E", "H");
+	        graph.addEdge("F", "J");
+	        graph.addEdge("H", "I");
+	        graph.addEdge("I", "J");
+	    } catch (IllegalArgumentException e) {
+	        System.out.println("Lỗi khi thêm cạnh: " + e.getMessage());
+	        return;
+	    }
 
         // Gọi hàm quay lui để tìm tập hợp độc lập lớn nhất
         findMaxIndependentSet(graph, new HashSet<>(), 0, vertices);

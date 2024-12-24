@@ -1,33 +1,41 @@
-package MIS;
-
+package src.MIS;
+import src.MIS.MyGraph;
 
 import java.util.*;
 
 public class Greedy {
     public static void main(String[] args) {
         // Bước 1: Tạo đồ thị
-        MyGraph myGraph = new MyGraph();
+        MyGraph graph = new MyGraph();
 
-        // Thêm các đỉnh vào đồ thị
-        myGraph.addVertex("A");
-        myGraph.addVertex("B");
-        myGraph.addVertex("C");
-        myGraph.addVertex("D");
-        myGraph.addVertex("E");
-        myGraph.addVertex("F");
-        myGraph.addVertex("G");
+     // Thêm các đỉnh vào đồ thị
+        String[] vertices = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        for (String vertex : vertices) {
+            graph.addVertex(vertex);
+        }
 
-        // Thêm các cạnh giữa các đỉnh
-        myGraph.addEdge("A", "B");
-        myGraph.addEdge("A", "C");
-        myGraph.addEdge("B", "D");
-        myGraph.addEdge("C", "D");
-        myGraph.addEdge("C", "E");
-        myGraph.addEdge("E", "F");
-        myGraph.addEdge("E", "G");
+        try {
+        // Thêm các cạnh vào đồ thị
+	        graph.addEdge("A", "B");
+	        graph.addEdge("A", "C");
+	        graph.addEdge("B", "C");
+	        graph.addEdge("B", "E");
+	        graph.addEdge("C", "E");
+	        graph.addEdge("C", "F");
+	        graph.addEdge("D", "F");
+	        graph.addEdge("D", "G");
+	        graph.addEdge("E", "H");
+	        graph.addEdge("F", "J");
+	        graph.addEdge("H", "I");
+	        graph.addEdge("I", "J");
+	    } catch (IllegalArgumentException e) {
+	        System.out.println("Lỗi khi thêm cạnh: " + e.getMessage());
+	        return;
+	    }
+
 
         // Bước 2: Gọi phương thức tìm tập độc lập lớn nhất
-        List<String> tapDocLapLonNhat = timTapDocLapLonNhat(myGraph);
+        List<String> tapDocLapLonNhat = timTapDocLapLonNhat(graph);
 
         System.out.println("Tập độc lập lớn nhất: " + tapDocLapLonNhat);
     }
